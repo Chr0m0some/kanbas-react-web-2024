@@ -3,7 +3,7 @@ export default function Modules() {
       <div>
         <button>Collapse All</button>
         <button>View Progress</button>
-        <select id="wd-select-one-genre">
+        <select id="wd-publish">
           <option value="SOME">Publish Some</option>
           <option value="NONE">Publish None</option>
           <option selected value="ALL">

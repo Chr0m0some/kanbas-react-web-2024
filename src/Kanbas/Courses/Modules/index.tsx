@@ -1,7 +1,15 @@
 export default function Modules() {
     return (
       <div>
-        {/* Collapse All button, View Progress button, etc. */}
+        <button>Collapse All</button>
+        <button>View Progress</button>
+        <select id="wd-select-one-genre">
+          <option value="SOME">Publish Some</option>
+          <option value="NONE">Publish None</option>
+          <option selected value="ALL">
+              Publish All</option>
+        </select>
+        <button>+ Module</button>
         <ul id="wd-modules">
           <li className="wd-module">
             <div className="wd-title">Week 1</div>

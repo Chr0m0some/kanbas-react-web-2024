@@ -2,10 +2,11 @@ import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import { Routes, Route, Navigate } from "react-router";
 import Courses from "./Courses";
+import "./styles.css";
 export default function Kanbas() {
   return (
-    <div id="wd-kanbas">
-      <div className="d-flex">
+    <div id="wd-kanbas" className="h-100">
+      <div className="d-flex h-100">
         <div className="bg-black d-none d-md-block">
           <KanbasNavigation />
         </div>

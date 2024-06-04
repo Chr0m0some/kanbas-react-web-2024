@@ -6,10 +6,10 @@ export default function Kanbas() {
   return (
     <div id="wd-kanbas">
       <div className="d-flex">
-        <div>
+        <div className="bg-black d-none d-md-block">
           <KanbasNavigation />
         </div>
-        <div>
+        <div className="flex-fill p-4 bg-success">
           <Routes>
             <Route path="/" element={<Navigate to="Dashboard" />} />
             <Route path="Account" element={<h1>Account</h1>} />

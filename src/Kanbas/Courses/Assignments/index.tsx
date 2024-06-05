@@ -1,44 +1,78 @@
-import { CiSearch } from "react-icons/ci";
-
+import AssignmentsControls from "./AssignmentsControls";
+import { BsGripVertical } from "react-icons/bs"
+import { MdOutlineAssignment } from "react-icons/md";
+import AssignmentControlButtons from "./AssignmentControlButtons";
+import LessonControlButtons from "../Modules/LessonControlButtons";
+import "./index.css";
 export default function Assignments() {
-	return (
-		<div id="wd-assignments">
-			<div className="wd-assigment-controls row">
-				<div id="wd-search row" className="d-flex col">
-					<span className="input-group-text rounded-0 border border-0 p-2">
-						<CiSearch className='fs-5' />
-					</span>
-					<input type="text" className="form-control rounded-0 border border-0" placeholder="Search..." />
-				</div>
-				<button id="wd-add-assignment-group" className="col">+ Group</button>
-				<button id="wd-add-assignment" className="col">+ Assignment</button>
-			</div>
-			<h3 id="wd-assignments-title">
-				ASSIGNMENTS 40% of Total <button>+</button>
-			</h3>
-			<ul id="wd-assignment-list">
-				<li className="wd-assignment-list-item">
-					<a className="wd-assignment-link"
-						href="#/Kanbas/Courses/1234/Assignments/123">
-						A1 - ENV + HTML
-					</a>
-					<p>Multiple Modules | <b>Not available until</b> May 6 at 12:00am | <b>Due</b> May 13 at 11:59PM | 100 pts</p>
-				</li>
-				<li className="wd-assignment-list-item">
-					<a className="wd-assignment-link"
-						href="#/Kanbas/Courses/1234/Assignments/123">
-						A2 - CSS + BOOTSTRAP
-					</a>
-					<p>Multiple Modules | <b>Not available until</b> May 13 at 12:00am | <b>Due</b> May 20 at 11:59PM | 100 pts</p>
-				</li>
-				<li className="wd-assignment-list-item">
-					<a className="wd-assignment-link"
-						href="#/Kanbas/Courses/1234/Assignments/123">
-						A3 - JAVASCRIPT + REACT
-					</a>
-					<p>Multiple Modules | <b>Not available until</b> May 20 at 12:00am | <b>Due</b> May 27 at 11:59PM | 100 pts</p>
-				</li>
-			</ul>
-		</div>
-	);
+  return (
+    <div id="wd-assignments">
+      <AssignmentsControls /><br /><br /><br /><br />
+      <ul id="wd-assignment-list" className="list-group rounded-0">
+        <li id="wd-assignments-section" className="list-group-item p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary">
+            <BsGripVertical className="me-2 fs-3" />
+            ASSIGNMENTS
+            <AssignmentControlButtons />
+          </div>
+          <ul id="wd-assignments" className="list-group rounded-0">
+            <li id="wd-assignment" className="list-group-item p-3 ps-2">
+              <div id="wd-assignment-content" className="row align-items-center">
+                <div className="col">
+                  <div className="row align-items-center flex-nowrap">
+                    <div className="col-auto">
+                      <BsGripVertical className="fs-3" />
+                    </div>
+                    <div className="col-auto">
+                      <h5><strong>A1</strong></h5>
+                      <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 20 at 12:00am | <br /><strong>Due</strong> May 27 at 11:59pm | 100 pts</p>
+                    </div>
+                  </div>
+                </div>
+                <div id="wd-lesson-control-buttons" className="col">
+                  <LessonControlButtons />
+                </div>
+              </div>
+            </li>
+            <li id="wd-assignment" className="list-group-item p-3 ps-1">
+              <div id="wd-assignment-content" className="row align-items-center">
+                <div className="col">
+                  <div className="row align-items-center flex-nowrap">
+                    <div className="col-auto">
+                      <BsGripVertical className="fs-3" />
+                    </div>
+                    <div className="col-auto">
+                      <h5><strong>A2</strong></h5>
+                      <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 6 at 12:00am | <br /><strong>Due</strong> May 13 at 11:59pm | 100 pts</p>
+                    </div>
+                  </div>
+                </div>
+                <div id="wd-lesson-control-buttons" className="col">
+                  <LessonControlButtons />
+                </div>
+              </div>
+            </li>
+            <li id="wd-assignment" className="list-group-item p-3 ps-1">
+              <div id="wd-assignment-content" className="row align-items-center">
+                <div className="col">
+                  <div className="row align-items-center flex-nowrap">
+                    <div className="col-auto">
+                      <BsGripVertical className="fs-3" />
+                    </div>
+                    <div className="col-auto">
+                      <h5><strong>A3</strong></h5>
+                      <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 13 at 12:00am | <br /><strong>Due</strong> May 20 at 11:59pm | 100 pts</p>
+                    </div>
+                  </div>
+                </div>
+                <div id="wd-lesson-control-buttons" className="col">
+                  <LessonControlButtons />
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  );
 }

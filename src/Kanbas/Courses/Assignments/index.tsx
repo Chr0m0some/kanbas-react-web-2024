@@ -24,7 +24,10 @@ export default function Assignments() {
                       <BsGripVertical className="fs-3" />
                     </div>
                     <div className="col-auto">
-                      <h5><strong>A1</strong></h5>
+                      <a className="wd-assignment-link link-body-emphasis"
+                        href="#/Kanbas/Courses/1234/Assignments/123">
+                        A1
+                      </a>
                       <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 20 at 12:00am | <br /><strong>Due</strong> May 27 at 11:59pm | 100 pts</p>
                     </div>
                   </div>
@@ -42,7 +45,10 @@ export default function Assignments() {
                       <BsGripVertical className="fs-3" />
                     </div>
                     <div className="col-auto">
-                      <h5><strong>A2</strong></h5>
+                      <a className="wd-assignment-link link-body-emphasis"
+                        href="#/Kanbas/Courses/1234/Assignments/123">
+                        A2
+                      </a>
                       <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 6 at 12:00am | <br /><strong>Due</strong> May 13 at 11:59pm | 100 pts</p>
                     </div>
                   </div>
@@ -60,7 +66,10 @@ export default function Assignments() {
                       <BsGripVertical className="fs-3" />
                     </div>
                     <div className="col-auto">
-                      <h5><strong>A3</strong></h5>
+                      <a className="wd-assignment-link link-body-emphasis"
+                        href="#/Kanbas/Courses/1234/Assignments/123">
+                        A3
+                      </a>
                       <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 13 at 12:00am | <br /><strong>Due</strong> May 20 at 11:59pm | 100 pts</p>
                     </div>
                   </div>

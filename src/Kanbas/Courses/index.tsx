@@ -5,6 +5,7 @@ import Modules from "./Modules";
 import CoursesNavigation from "./Navigation";
 import { Navigate, Route, Routes } from "react-router";
 import { FaAlignJustify } from "react-icons/fa6";
+import Grades from "./Grades/Grades";
 export default function Courses() {
   return (
     <div id="wd-courses">
@@ -23,6 +24,7 @@ export default function Courses() {
             <Route path="Modules" element={<Modules />} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:id" element={<AssignmentEditor />} />
+            <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>
       </div>

@@ -4,10 +4,10 @@ export default function AssignmentsControls() {
 	return (
 		<div className="wd-assigment-controls container row text-nowrap flex-nowrap">
 			<div id="wd-search" className="col-auto input-group w-50 me-5 flex-nowrap">
-				<span className="input-group-text rounded-start border border-0 p-2">
+				<span className="input-group-text rounded-start border p-2">
 					<CiSearch className='fs-5' />
 				</span>
-				<input type="text" className="form-control rounded-end border border-0" placeholder="Search..." />
+				<input type="text" className="form-control rounded-end border" placeholder="Search..." />
 			</div>
 			<button id="wd-add-assignment-group" type="button"
 				className="col-auto btn btn-lg btn-secondary me-2">

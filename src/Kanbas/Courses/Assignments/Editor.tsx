@@ -22,7 +22,7 @@ export default function AssignmentEditor() {
 						<label htmlFor="wd-group" className="form-label me-2">Assignment Group</label>
 						<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
 							<div className="dropdown w-100">
-								<button className="btn bg-white dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<button className="btn bg-white dropdown-toggle w-100 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Assignments
 								</button>
 								<ul className="dropdown-menu w-100">
@@ -38,7 +38,7 @@ export default function AssignmentEditor() {
 						<label htmlFor="wd-display-grade-as" className="form-label me-2">Display Grade as</label>
 						<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
 							<div className="dropdown w-100">
-								<button className="btn bg-white dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<button className="btn bg-white dropdown-toggle w-100 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Percentage
 								</button>
 								<ul className="dropdown-menu w-100">
@@ -54,7 +54,7 @@ export default function AssignmentEditor() {
 						<div className="mb-3 w-100 d-flex border rounded p-3 align-items-center flex-grow-1" style={{ maxWidth: '400px' }}>
 							<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
 								<div className="dropdown w-100 mb-3">
-									<button className="btn bg-white dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<button className="btn bg-white dropdown-toggle w-100 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 										Online
 									</button>
 									<ul className="dropdown-menu w-100">

@@ -24,6 +24,9 @@ export default function Assignments() {
                       <BsGripVertical className="fs-3" />
                     </div>
                     <div className="col-auto">
+                      <MdOutlineAssignment className="fs-4 text-success" />
+                    </div>
+                    <div className="col-auto">
                       <a className="wd-assignment-link link-body-emphasis"
                         href="#/Kanbas/Courses/1234/Assignments/123">
                         A1
@@ -45,6 +48,9 @@ export default function Assignments() {
                       <BsGripVertical className="fs-3" />
                     </div>
                     <div className="col-auto">
+                      <MdOutlineAssignment className="fs-4 text-success" />
+                    </div>
+                    <div className="col-auto">
                       <a className="wd-assignment-link link-body-emphasis"
                         href="#/Kanbas/Courses/1234/Assignments/123">
                         A2
@@ -64,6 +70,9 @@ export default function Assignments() {
                   <div className="row align-items-center flex-nowrap">
                     <div className="col-auto">
                       <BsGripVertical className="fs-3" />
+                    </div>
+                    <div className="col-auto">
+                      <MdOutlineAssignment className="fs-4 text-success" />
                     </div>
                     <div className="col-auto">
                       <a className="wd-assignment-link link-body-emphasis"

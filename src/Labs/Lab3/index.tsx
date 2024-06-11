@@ -4,10 +4,13 @@ import ArrowFunctions from "./ArrowFunctions";
 import BooleanVariables from "./BooleanVariables";
 import ConditionalOutputIfElse from "./ConditionalOutputIfElse";
 import ConditionalOutputInline from "./ConditionalOutputInLine";
+import Destructing from "./Destructing";
+import DestructingImports from "./DestructingImports";
 import FilterFunction from "./FilterFunction";
 import FindFunction from "./FindFunction";
 import FindIndex from "./FindIndex";
 import ForLoops from "./ForLoops";
+import FunctionDestructing from "./FunctionDestructing";
 import House from "./House";
 import IfElse from "./IfElse";
 import ImpliedReturn from "./ImpliedReturn";
@@ -51,6 +54,9 @@ export default function Lab3() {
             <TodoItem />
             <TodoList />
             <Spreading />
+            <Destructing />
+            <FunctionDestructing />
+            <DestructingImports />
         </div>
     )
 }

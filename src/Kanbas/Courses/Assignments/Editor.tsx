@@ -50,7 +50,7 @@ export default function AssignmentEditor() {
 						</div>
 					</div>
 					<div className="mb-3 w-100 d-flex justify-content-end">
-						<label className="form-label me-2">Submission Type</label>
+						<label htmlFor="wd-submission-type" className="form-label me-2">Submission Type</label>
 						<div className="mb-3 w-100 d-flex border rounded p-3 align-items-center flex-grow-1" style={{ maxWidth: '400px' }}>
 							<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
 								<div className="dropdown w-100 mb-3">
@@ -63,34 +63,34 @@ export default function AssignmentEditor() {
 									</ul>
 								</div>
 								<div className="d-flex flex-column">
-									<label htmlFor="wd-points" className="form-label"><strong>Online Entry Options</strong></label>
+									<label className="form-label"><strong>Online Entry Options</strong></label>
 									<div className="form-check">
-										<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-										<label className="form-check-label" htmlFor="flexCheckDefault">
+										<input className="form-check-input" type="checkbox" value="" id="wd-text-entry" />
+										<label className="form-check-label" htmlFor="wd-text-entry">
 											Text Entry
 										</label>
 									</div>
 									<div className="form-check">
-										<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-										<label className="form-check-label" htmlFor="flexCheckDefault">
+										<input className="form-check-input" type="checkbox" value="" id="wd-website-url" />
+										<label className="form-check-label" htmlFor="wd-website-url">
 											Website URL
 										</label>
 									</div>
 									<div className="form-check">
-										<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-										<label className="form-check-label" htmlFor="flexCheckDefault">
+										<input className="form-check-input" type="checkbox" value="" id="wd-media-recordings" />
+										<label className="form-check-label" htmlFor="wd-media-recordings">
 											Media Recordings
 										</label>
 									</div>
 									<div className="form-check">
-										<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-										<label className="form-check-label" htmlFor="flexCheckDefault">
+										<input className="form-check-input" type="checkbox" value="" id="wd-student-annotation" />
+										<label className="form-check-label" htmlFor="wd-student-annotation">
 											Student Annotation
 										</label>
 									</div>
 									<div className="form-check">
-										<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-										<label className="form-check-label" htmlFor="flexCheckDefault">
+										<input className="form-check-input" type="checkbox" value="" id="wd-file-upload" />
+										<label className="form-check-label" htmlFor="wd-file-upload">
 											File Uploads
 										</label>
 									</div>

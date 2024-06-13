@@ -127,7 +127,7 @@ export default function AssignmentEditor() {
 									<input id="wd-available-until" className="form-control" type="date"
 										min="2024-05-06"
 										max="2024-08-24"
-										value="2024-05-20"
+										
 									/>
 								</div>
 							</div>

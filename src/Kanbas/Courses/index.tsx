@@ -3,15 +3,21 @@ import AssignmentEditor from "./Assignments/Editor";
 import Home from "./Home";
 import Modules from "./Modules";
 import CoursesNavigation from "./Navigation";
-import { Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa6";
 import Grades from "./Grades/Grades";
+import { courses } from "../Database";
+
 export default function Courses() {
+  const { cid } = useParams();
+  const course = courses.find((course) => course._id === cid);
+  const { pathname } = useLocation();
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
-        Course 1234</h2>
+        {course && course.name} &gt; {pathname.split("/")[4]}
+      </h2>
       <div className="d-flex">
         <hr />
         <div className="d-none d-md-block">

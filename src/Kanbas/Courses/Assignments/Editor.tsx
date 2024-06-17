@@ -1,13 +1,17 @@
+import { useParams } from "react-router";
+import { assignments } from "../../Database";
 export default function AssignmentEditor() {
+	const { id } = useParams();
+	const assignment = assignments.find((assignment) => assignment._id === id);
 	return (
 		<div id="wd-assignments-editor">
 			<div className="mb-3">
 				<label htmlFor="wd-name" className="form-label">Assignment Name</label>
-				<input id="wd-name" className="form-control" value="A1" />
+				<input id="wd-name" className="form-control" value={assignment?.title} />
 			</div>
 			<div className="mb-3">
 				<textarea className="form-control" id="wd-description" rows={7}>
-					The assignment is available online. Submit a link to the landing page of your Web application running on Netlify.
+					{assignment?.description}
 				</textarea>
 			</div>
 			<div className="container">
@@ -15,7 +19,7 @@ export default function AssignmentEditor() {
 					<div className="mb-3 w-100 d-flex justify-content-end">
 						<label htmlFor="wd-points" className="form-label me-2">Points</label>
 						<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
-							<input id="wd-points" className="form-control" value={100} />
+							<input id="wd-points" className="form-control" value={assignment?.points} />
 						</div>
 					</div>
 					<div className="mb-3 w-100 d-flex justify-content-end">
@@ -109,7 +113,7 @@ export default function AssignmentEditor() {
 								<div className="mb-3">
 									<label htmlFor="wd-due-date" className="form-label"><strong>Due</strong></label>
 									<input id="wd-due-date" className="form-control" type="date"
-										value="2024-05-13"
+										value={assignment?.due_date}
 										min="2024-05-13"
 										max="2024-08-24"
 									/>
@@ -117,7 +121,7 @@ export default function AssignmentEditor() {
 								<div className="mb-3">
 									<label htmlFor="wd-available-from" className="form-label"><strong>Available From</strong></label>
 									<input id="wd-available-from" className="form-control" type="date"
-										value="2024-05-06"
+										value={assignment?.available_date}
 										min="2024-05-06"
 										max="2024-08-24"
 									/>
@@ -125,9 +129,9 @@ export default function AssignmentEditor() {
 								<div>
 									<label htmlFor="wd-available-until" className="form-label"><strong>Until</strong></label>
 									<input id="wd-available-until" className="form-control" type="date"
+										value={assignment?.due_date}
 										min="2024-05-06"
 										max="2024-08-24"
-										
 									/>
 								</div>
 							</div>

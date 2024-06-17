@@ -4,7 +4,11 @@ import { MdOutlineAssignment } from "react-icons/md";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import "./index.css";
+import { useParams } from "react-router";
+import { assignments } from "../../Database";
+import { Link } from "react-router-dom";
 export default function Assignments() {
+  const { cid } = useParams();
   return (
     <div id="wd-assignments">
       <AssignmentsControls /><br /><br /><br /><br />
@@ -16,78 +20,37 @@ export default function Assignments() {
             <AssignmentControlButtons />
           </div>
           <ul id="wd-assignments" className="list-group rounded-0">
-            <li id="wd-assignment" className="list-group-item p-3 ps-2">
-              <div id="wd-assignment-content" className="row align-items-center">
-                <div className="col">
-                  <div className="row align-items-center flex-nowrap">
-                    <div className="col-auto">
-                      <BsGripVertical className="fs-3" />
+            {
+              assignments.filter((assignment: any) => (assignment.course === cid)).map((assignment: any) => (
+                <li
+                  key={assignment._id}
+                  id="wd-assignment"
+                  className="list-group-item p-3 ps-2"
+                >
+                  <div id="wd-assignment-content" className="row align-items-center">
+                    <div className="col">
+                      <div className="row align-items-center flex-nowrap">
+                        <div className="col-auto">
+                          <BsGripVertical className="fs-3" />
+                        </div>
+                        <div className="col-auto">
+                          <MdOutlineAssignment className="fs-4 text-success" />
+                        </div>
+                        <div className="col-auto">
+                          <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} id="wd-assignment-link" className="link-body-emphasis">
+                            {assignment.title}
+                          </Link>
+                          <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 20 at 12:00am | <br /><strong>Due</strong> May 27 at 11:59pm | 100 pts</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="col-auto">
-                      <MdOutlineAssignment className="fs-4 text-success" />
-                    </div>
-                    <div className="col-auto">
-                      <a className="wd-assignment-link link-body-emphasis"
-                        href="#/Kanbas/Courses/1234/Assignments/123">
-                        A1
-                      </a>
-                      <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 20 at 12:00am | <br /><strong>Due</strong> May 27 at 11:59pm | 100 pts</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="wd-lesson-control-buttons" className="col">
-                  <LessonControlButtons />
-                </div>
-              </div>
-            </li>
-            <li id="wd-assignment" className="list-group-item p-3 ps-1">
-              <div id="wd-assignment-content" className="row align-items-center">
-                <div className="col">
-                  <div className="row align-items-center flex-nowrap">
-                    <div className="col-auto">
-                      <BsGripVertical className="fs-3" />
-                    </div>
-                    <div className="col-auto">
-                      <MdOutlineAssignment className="fs-4 text-success" />
-                    </div>
-                    <div className="col-auto">
-                      <a className="wd-assignment-link link-body-emphasis"
-                        href="#/Kanbas/Courses/1234/Assignments/123">
-                        A2
-                      </a>
-                      <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 6 at 12:00am | <br /><strong>Due</strong> May 13 at 11:59pm | 100 pts</p>
+                    <div id="wd-lesson-control-buttons" className="col">
+                      <LessonControlButtons />
                     </div>
                   </div>
-                </div>
-                <div id="wd-lesson-control-buttons" className="col">
-                  <LessonControlButtons />
-                </div>
-              </div>
-            </li>
-            <li id="wd-assignment" className="list-group-item p-3 ps-1">
-              <div id="wd-assignment-content" className="row align-items-center">
-                <div className="col">
-                  <div className="row align-items-center flex-nowrap">
-                    <div className="col-auto">
-                      <BsGripVertical className="fs-3" />
-                    </div>
-                    <div className="col-auto">
-                      <MdOutlineAssignment className="fs-4 text-success" />
-                    </div>
-                    <div className="col-auto">
-                      <a className="wd-assignment-link link-body-emphasis"
-                        href="#/Kanbas/Courses/1234/Assignments/123">
-                        A3
-                      </a>
-                      <p className="mb-1 text-muted fs-6"><span className="text-danger">Multiple Modules</span> | <strong>Not available until</strong> May 13 at 12:00am | <br /><strong>Due</strong> May 20 at 11:59pm | 100 pts</p>
-                    </div>
-                  </div>
-                </div>
-                <div id="wd-lesson-control-buttons" className="col">
-                  <LessonControlButtons />
-                </div>
-              </div>
-            </li>
+                </li>
+              ))
+            }
           </ul>
         </li>
       </ul>

@@ -1,7 +1,8 @@
 import { useParams } from "react-router";
 import { assignments } from "../../Database";
+import { Link } from "react-router-dom";
 export default function AssignmentEditor() {
-	const { id } = useParams();
+	const { id, cid } = useParams();
 	const assignment = assignments.find((assignment) => assignment._id === id);
 	return (
 		<div id="wd-assignments-editor">
@@ -141,12 +142,8 @@ export default function AssignmentEditor() {
 			</div>
 			<hr />
 			<div className="d-flex justify-content-end">
-				<button id="wd-add-assignment-group" type="button"
-					className="col-auto btn btn-lg btn-secondary me-2">
-					Cancel</button>
-				<button id="wd-add-assignment" type="button"
-					className="col-auto btn btn-lg btn-danger justify-content-end me-2">
-					Save</button>
+				<Link to={`/Kanbas/Courses/${cid}/Assignments`} className="col-auto btn btn-lg btn-secondary me-2">Cancel</Link>
+				<Link to={`/Kanbas/Courses/${cid}/Assignments`} className="col-auto btn btn-lg btn-danger me-2">Save</Link>
 			</div>
 		</div>
 	);

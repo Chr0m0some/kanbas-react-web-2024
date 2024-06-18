@@ -3,7 +3,10 @@ import { BiImport } from "react-icons/bi";
 import { BiExport } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
+import { useParams } from "react-router";
+import { users, enrollments, assignments, grades } from "../../Database";
 export default function Grades() {
+    const { cid } = useParams();
     return (
         <div id="grades" style={{ maxWidth: "900px" }}>
             <div id="gradesButtons" className="d-flex justify-content-end mb-3">
@@ -55,55 +58,26 @@ export default function Grades() {
                         <thead>
                             <tr>
                                 <th className="text-center">Student Name</th>
-                                <th className="text-center">A1 SETUP <br />Out of 100</th>
-                                <th className="text-center">A2 HTML<br />Out of 100</th>
-                                <th className="text-center">A3 CSS<br />Out of 100</th>
-                                <th className="text-center">A4 BOOTSTRAP<br />Out of 100</th>
+                                {assignments.filter(
+                                    (assignment: any) => (assignment.course === cid)
+                                ).map((assignment: any) => (
+                                    <th key={assignment._id} className="text-center">{assignment._id}</th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th className="text-danger text-center">Jamie Adams</th>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">96.67%</td>
-                                <td className="text-center">92.18%</td>
-                                <td className="text-center">66.72%</td>
-                            </tr>
-                            <tr>
-                                <th className="text-danger text-center">Christina Allen</th>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                            </tr>
-                            <tr>
-                                <th className="text-danger text-center">Sameen Ansari</th>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">88.03%</td>
-                                <td className="text-center">98.99%</td>
-                            </tr>
-                            <tr>
-                                <th className="text-danger text-center">Han Bao</th>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">96.67%</td>
-                                <td className="text-center">98.37%</td>
-                                <td className="text-center">100%</td>
-                            </tr>
-                            <tr>
-                                <th className="text-danger text-center">Mahi Sai Srinivasa Bobbili</th>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">96.67%</td>
-                                <td className="text-center">92.18%</td>
-                                <td className="text-center">66.72%</td>
-                            </tr>
-                            <tr>
-                                <th className="text-danger text-center">Siran Cao</th>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                                <td className="text-center">100%</td>
-                            </tr>
+                            {
+                                users.filter((user: any) => enrollments.some((enrollment: any) =>
+                                    enrollment.user === user._id && enrollment.course === cid
+                                )).map((user: any) => (
+                                    <tr>
+                                        <th key={user._id} className="text-danger text-center">{user.firstName + " " + user.lastName}</th>
+                                        {grades.filter((grade: any) => (grade.student === user._id && (grade.assignment.charAt(1) === cid?.charAt(4)))
+                                        ).map((grade: any) => (
+                                            <td key={grade._id} className="text-center">{grade.grade}</td>
+                                        ))}
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>

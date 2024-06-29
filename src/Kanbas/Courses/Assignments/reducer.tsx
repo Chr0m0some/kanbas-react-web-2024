@@ -30,12 +30,14 @@ const assignmentsSlice = createSlice({
                 available_date: "",
                 due_date: ""
             };
-            // console.log(newAssignments);
+            console.log(newAssignments);
         },
         deleteAssignment: (state, { payload: assignmentId }) => {
+            console.log(assignmentId)
             state.assignments = state.assignments.filter(
                 (a: any) => a._id !== assignmentId
             );
+            console.log(state.assignments)
         },
         updateAssignment: (state, { payload: assignment }) => {
             state.assignments = state.assignments.map((a: any) =>
@@ -49,10 +51,11 @@ const assignmentsSlice = createSlice({
                 available_date: "",
                 due_date: ""
             };
+            console.log("update was called")
         },
         setAssignment: (state, { payload: assignment }) => {
             state.assignment = assignment;
-            // console.log(assignment);
+            console.log(state.assignment);
         },
     }
 });

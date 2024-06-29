@@ -1,8 +1,8 @@
 import AssignmentsControls from "./AssignmentsControls";
 import { BsGripVertical } from "react-icons/bs"
 import { MdOutlineAssignment } from "react-icons/md";
-import AssignmentControlButtons from "./AssignmentControlButtons";
-import LessonControlButtons from "../Modules/LessonControlButtons";
+import AssignmentHeaderButtons from "./AssignmentHeaderButtons";
+import AssignmentControlButtons from "./AssignmentControlButtons"
 import "./index.css";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function Assignments() {
           <div className="wd-title p-3 ps-2 bg-secondary">
             <BsGripVertical className="me-2 fs-3" />
             ASSIGNMENTS
-            <AssignmentControlButtons />
+            <AssignmentHeaderButtons />
           </div>
           <ul id="wd-assignments" className="list-group rounded-0">
             {
@@ -46,7 +46,10 @@ export default function Assignments() {
                       </div>
                     </div>
                     <div id="wd-lesson-control-buttons" className="col">
-                      <LessonControlButtons />
+                      <AssignmentControlButtons
+                        assignmentId={assignment._id}
+                        assignmentTitle={assignment.title}
+                      />
                     </div>
                   </div>
                 </li>

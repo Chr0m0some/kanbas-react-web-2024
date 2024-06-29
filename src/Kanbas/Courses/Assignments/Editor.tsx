@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment, setAssignment } from "./reducer";
+import { addAssignment, updateAssignment, setAssignment } from "./reducer";
 export default function AssignmentEditor() {
 	const { id, cid } = useParams();
 	const { assignments } = useSelector((state: any) => state.assignmentsReducer);
@@ -12,20 +12,29 @@ export default function AssignmentEditor() {
 	}
 	return (
 		<div id="wd-assignments-editor">
+			<script src="http://localhost:8097"></script>
 			<div className="mb-3">
 				<label htmlFor="wd-name" className="form-label">Assignment Name</label>
 				<input id="wd-name" className="form-control"
-					onChange={(e) =>
-						dispatch(setAssignment({ ...assignment, title: e.target.value }))
-					}
+					onChange={(e) => {
+						if (assignment._id) {
+							dispatch(updateAssignment({ ...assignment, title: e.target.value }));
+						} else {
+							dispatch(setAssignment({ ...assignment, title: e.target.value }));
+						}
+					}}
 					value={assignment?.title}
 				/>
 			</div>
 			<div className="mb-3">
 				<textarea className="form-control"
-					onChange={(e) =>
-						dispatch(setAssignment({ ...assignment, description: e.target.value }))
-					}
+					onChange={(e) => {
+						if (assignment._id) {
+							dispatch(updateAssignment({ ...assignment, description: e.target.value }));
+						} else {
+							dispatch(setAssignment({ ...assignment, description: e.target.value }));
+						}
+					}}
 					id="wd-description" rows={7}>
 					{assignment?.description}
 				</textarea>
@@ -36,7 +45,13 @@ export default function AssignmentEditor() {
 						<label htmlFor="wd-points" className="form-label me-2">Points</label>
 						<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
 							<input id="wd-points" className="form-control"
-								onChange={(e) => dispatch(setAssignment({ ...assignment, points: e.target.value }))}
+								onChange={(e) => {
+									if (assignment._id) {
+										dispatch(updateAssignment({ ...assignment, points: e.target.value }));
+									} else {
+										dispatch(setAssignment({ ...assignment, points: e.target.value }));
+									}
+								}}
 								value={assignment?.points}
 							/>
 						</div>
@@ -132,7 +147,13 @@ export default function AssignmentEditor() {
 								<div className="mb-3">
 									<label htmlFor="wd-due-date" className="form-label"><strong>Due</strong></label>
 									<input id="wd-due-date" className="form-control" type="date"
-										onChange={(e) => dispatch(setAssignment({ ...assignment, due_date: e.target.value }))}
+										onChange={(e) => {
+											if (assignment._id) {
+												dispatch(updateAssignment({ ...assignment, due_date: e.target.value }));
+											} else {
+												dispatch(setAssignment({ ...assignment, due_date: e.target.value }));
+											}
+										}}
 										value={assignment?.due_date}
 										min="2024-05-13"
 										max="2024-08-24"
@@ -141,7 +162,13 @@ export default function AssignmentEditor() {
 								<div className="mb-3">
 									<label htmlFor="wd-available-from" className="form-label"><strong>Available From</strong></label>
 									<input id="wd-available-from" className="form-control" type="date"
-										onChange={(e) => dispatch(setAssignment({ ...assignment, available_date: e.target.value }))}
+										onChange={(e) => {
+											if (assignment._id) {
+												dispatch(updateAssignment({ ...assignment, available_date: e.target.value }));
+											} else {
+												dispatch(setAssignment({ ...assignment, available_date: e.target.value }));
+											}
+										}}
 										value={assignment?.available_date}
 										min="2024-05-06"
 										max="2024-08-24"
@@ -150,7 +177,13 @@ export default function AssignmentEditor() {
 								<div>
 									<label htmlFor="wd-available-until" className="form-label"><strong>Until</strong></label>
 									<input id="wd-available-until" className="form-control" type="date"
-										onChange={(e) => dispatch(setAssignment({ ...assignment, due_date: e.target.value }))}
+										onChange={(e) => {
+											if (assignment._id) {
+												dispatch(updateAssignment({ ...assignment, due_date: e.target.value }));
+											} else {
+												dispatch(setAssignment({ ...assignment, due_date: e.target.value }));
+											}
+										}}
 										value={assignment?.due_date}
 										min="2024-05-06"
 										max="2024-08-24"
@@ -165,7 +198,13 @@ export default function AssignmentEditor() {
 			<div className="d-flex justify-content-end">
 				<Link to={`/Kanbas/Courses/${cid}/Assignments`} className="col-auto btn btn-lg btn-secondary me-2">Cancel</Link>
 				<Link to={`/Kanbas/Courses/${cid}/Assignments`}
-					onClick={(e) => dispatch(addAssignment({ ...assignment, course: cid }))}
+					onClick={(e) => {
+						if (assignment._id) {
+							dispatch(updateAssignment({ ...assignment }));
+						} else {
+							dispatch(addAssignment({ ...assignment, course: cid }));
+						}
+					}}
 					className="col-auto btn btn-lg btn-danger me-2">
 					Save
 				</Link>

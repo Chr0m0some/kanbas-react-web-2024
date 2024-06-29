@@ -5,10 +5,11 @@ import AssignmentControlButtons from "./AssignmentControlButtons";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import "./index.css";
 import { useParams } from "react-router";
-import { assignments } from "../../Database";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function Assignments() {
   const { cid } = useParams();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   return (
     <div id="wd-assignments">
       <AssignmentsControls /><br /><br /><br /><br />

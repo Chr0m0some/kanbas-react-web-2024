@@ -1,6 +1,8 @@
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
+import { Link, useParams } from "react-router-dom";
 export default function AssignmentsControls() {
+	const { cid } = useParams();
 	return (
 		<div className="wd-assigment-controls container row text-nowrap flex-nowrap">
 			<div id="wd-search" className="col-auto input-group w-50 me-5 flex-nowrap">
@@ -12,11 +14,15 @@ export default function AssignmentsControls() {
 			<button id="wd-add-assignment-group" type="button"
 				className="col-auto btn btn-lg btn-secondary me-2">
 				<FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-				Group</button>
-			<button id="wd-add-assignment" type="button"
-				className="col-auto btn btn-lg btn-danger justify-content-end me-2">
-				<FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-				Assignment</button>
+				Group
+			</button>
+			<Link to={`/Kanbas/Courses/${cid}/Assignments/123`} id="wd-assignment-link" className="link-body-emphasis">
+				<button id="wd-add-assignment" type="button"
+					className="col-auto btn btn-lg btn-danger justify-content-end me-2">
+					<FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+					Assignment
+				</button>
+			</Link>
 		</div>
 	);
 }

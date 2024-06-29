@@ -1,17 +1,32 @@
 import { useParams } from "react-router";
-import { assignments } from "../../Database";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addAssignment, deleteAssignment, updateAssignment, setAssignment } from "./reducer";
 export default function AssignmentEditor() {
 	const { id, cid } = useParams();
-	const assignment = assignments.find((assignment) => assignment._id === id);
+	const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+	let { assignment } = useSelector((state: any) => state.assignmentsReducer);
+	const dispatch = useDispatch();
+	if (assignments.find((assignment: any) => assignment._id === id)) {
+		assignment = assignments.find((assignment: any) => assignment._id === id);
+	}
 	return (
 		<div id="wd-assignments-editor">
 			<div className="mb-3">
 				<label htmlFor="wd-name" className="form-label">Assignment Name</label>
-				<input id="wd-name" className="form-control" value={assignment?.title} />
+				<input id="wd-name" className="form-control"
+					onChange={(e) =>
+						dispatch(setAssignment({ ...assignment, title: e.target.value }))
+					}
+					value={assignment?.title}
+				/>
 			</div>
 			<div className="mb-3">
-				<textarea className="form-control" id="wd-description" rows={7}>
+				<textarea className="form-control"
+					onChange={(e) =>
+						dispatch(setAssignment({ ...assignment, description: e.target.value }))
+					}
+					id="wd-description" rows={7}>
 					{assignment?.description}
 				</textarea>
 			</div>
@@ -20,7 +35,10 @@ export default function AssignmentEditor() {
 					<div className="mb-3 w-100 d-flex justify-content-end">
 						<label htmlFor="wd-points" className="form-label me-2">Points</label>
 						<div className="flex-grow-1" style={{ maxWidth: '400px' }}>
-							<input id="wd-points" className="form-control" value={assignment?.points} />
+							<input id="wd-points" className="form-control"
+								onChange={(e) => dispatch(setAssignment({ ...assignment, points: e.target.value }))}
+								value={assignment?.points}
+							/>
 						</div>
 					</div>
 					<div className="mb-3 w-100 d-flex justify-content-end">
@@ -114,6 +132,7 @@ export default function AssignmentEditor() {
 								<div className="mb-3">
 									<label htmlFor="wd-due-date" className="form-label"><strong>Due</strong></label>
 									<input id="wd-due-date" className="form-control" type="date"
+										onChange={(e) => dispatch(setAssignment({ ...assignment, due_date: e.target.value }))}
 										value={assignment?.due_date}
 										min="2024-05-13"
 										max="2024-08-24"
@@ -122,6 +141,7 @@ export default function AssignmentEditor() {
 								<div className="mb-3">
 									<label htmlFor="wd-available-from" className="form-label"><strong>Available From</strong></label>
 									<input id="wd-available-from" className="form-control" type="date"
+										onChange={(e) => dispatch(setAssignment({ ...assignment, available_date: e.target.value }))}
 										value={assignment?.available_date}
 										min="2024-05-06"
 										max="2024-08-24"
@@ -130,6 +150,7 @@ export default function AssignmentEditor() {
 								<div>
 									<label htmlFor="wd-available-until" className="form-label"><strong>Until</strong></label>
 									<input id="wd-available-until" className="form-control" type="date"
+										onChange={(e) => dispatch(setAssignment({ ...assignment, due_date: e.target.value }))}
 										value={assignment?.due_date}
 										min="2024-05-06"
 										max="2024-08-24"
@@ -143,7 +164,11 @@ export default function AssignmentEditor() {
 			<hr />
 			<div className="d-flex justify-content-end">
 				<Link to={`/Kanbas/Courses/${cid}/Assignments`} className="col-auto btn btn-lg btn-secondary me-2">Cancel</Link>
-				<Link to={`/Kanbas/Courses/${cid}/Assignments`} className="col-auto btn btn-lg btn-danger me-2">Save</Link>
+				<Link to={`/Kanbas/Courses/${cid}/Assignments`}
+					onClick={(e) => dispatch(addAssignment({ ...assignment, course: cid }))}
+					className="col-auto btn btn-lg btn-danger me-2">
+					Save
+				</Link>
 			</div>
 		</div>
 	);

@@ -9,6 +9,7 @@ export default function AssignmentControlButtons({ assignmentId, assignmentTitle
     return (
         <div className="float-end text-nowrap">
             <FaTrash data-bs-toggle="modal" data-bs-target={`#wd-delete-assignment-dialog-${assignmentId}`} className="text-danger me-3"/>
+            {/* Generates the Modal Dialogue */}
             <div id={`wd-delete-assignment-dialog-${assignmentId}`} className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -29,6 +30,7 @@ export default function AssignmentControlButtons({ assignmentId, assignmentTitle
                     </div>
                 </div>
             </div>
+
             <GreenCheckmark />
             <IoEllipsisVertical className="fs-4" />
         </div>

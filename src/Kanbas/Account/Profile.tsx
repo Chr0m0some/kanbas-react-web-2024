@@ -1,15 +1,23 @@
 import * as client from "./client";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const fetchProfile = async () => {
-    const account = await client.profile();
-    setProfile(account);
+    try {
+      const account = await client.profile();
+      setProfile(account);
+    } catch (err: any) {
+      navigate("/Kanbas/Account/Signin");
+    }
   };
   const signout = async () => {
     await client.signout();
+    dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
   useEffect(() => {
@@ -19,7 +27,7 @@ export default function Profile() {
     <div className="wd-profile-screen">
       <h1>Profile</h1>
       {profile && (
-        <div>
+        <div className="d-flex flex-column gap-3">
           <input
             className="wd-username"
             value={profile.username}

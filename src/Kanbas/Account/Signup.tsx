@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
 import * as client from "./client";
 export default function Signup() {
   const [user, setUser] = useState<any>({});
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const signup = async () => {
-    await client.signup(user);
-    navigate("/Kanbas/Account/Profile");
+    try {
+      const currentUser = await client.signup(user);
+      dispatch(setCurrentUser(currentUser));
+      navigate("/Kanbas/Account/Profile");
+    } catch (err: any) {
+      setError(err.response.data.message);
+    }
   };
   return (
     <div className="wd-signup-screen">
       <h1>Sign up</h1>
+      {error && <div className="wd-error alert alert-danger">{error}</div>}
       <input
         value={user.username}
         onChange={(e) => setUser({ ...user, username: e.target.value })}

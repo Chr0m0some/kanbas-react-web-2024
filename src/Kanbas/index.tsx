@@ -31,13 +31,13 @@ export default function Kanbas() {
   };
   const deleteCourse = async (courseId: string) => {
     await client.deleteCourse(courseId);
-    setCourses(courses.filter((c) => c._id !== courseId));
+    setCourses(courses.filter((c) => c.number !== courseId));
   };
   const updateCourse = async () => {
     await client.updateCourse(course);
     setCourses(
       courses.map((c) => {
-        if (c._id === course._id) {
+        if (c.number === course.number) {
           return course;
         } else {
           return c;

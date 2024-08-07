@@ -12,6 +12,7 @@ export default function Profile() {
       const account = await client.profile();
       setProfile(account);
     } catch (err: any) {
+      console.log(err)
       navigate("/Kanbas/Account/Signin");
     }
   };
@@ -69,6 +70,7 @@ export default function Profile() {
           />
           <select
             className="wd-role"
+            value={profile.role}
             onChange={(e) => setProfile({ ...profile, role: e.target.value })}
           >
             <option value="USER">User</option>{" "}

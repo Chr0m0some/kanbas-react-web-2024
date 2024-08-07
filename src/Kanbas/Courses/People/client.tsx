@@ -23,6 +23,7 @@ export const deleteUser = async (userId: string) => {
 };
 export const updateUser = async (user: any) => {
   const response = await axios.put(`${USERS_API}/${user._id}`, user);
+  console.log("API response:", response.data);
   return response.data;
 };
 export const createUser = async (user: any) => {

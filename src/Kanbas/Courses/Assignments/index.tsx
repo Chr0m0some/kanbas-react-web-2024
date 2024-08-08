@@ -70,7 +70,7 @@ export default function Assignments() {
                           <p className="mb-1 text-muted fs-6">
                             <span className="text-danger">
                               Multiple Modules
-                            </span>{" "}
+                            </span>
                             | <strong>Not available until</strong> May 20 at
                             12:00am | <br />
                             <strong>Due</strong> May 27 at 11:59pm | 100 pts

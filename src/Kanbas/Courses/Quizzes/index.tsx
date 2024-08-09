@@ -2,18 +2,29 @@ import { BsGripVertical } from "react-icons/bs";
 import { RxRocket } from "react-icons/rx";
 import GreenCheckmark from "../Modules/GreenCheckmark";
 import QuizControls from "./QuizControls";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as client from "./client";
 import "./index.css";
 import { IoEllipsisVertical } from "react-icons/io5";
-import Details from "./Details";
+import { MdUnpublished } from "react-icons/md";
 import QuizDetails from "./Details";
 export default function Quizzes() {
   const { cid } = useParams();
+  const navigate = useNavigate();
   const [quizzes, setQuizzes] = useState([]);
   const dispatch = useDispatch();
+  const deleteQuiz = async (quizId: string) => {
+    await client.deleteQuiz(quizId);
+    fetchQuizzes();
+  };
+  const handlePublish = async (quizId: string, quiz: any) => {
+    const flipPublished = !quiz.published;
+    const updatedQuiz = { ...quiz, published: flipPublished };
+    await client.updateQuiz(quizId, updatedQuiz);
+    fetchQuizzes();
+  };
   const fetchQuizzes = async () => {
     const quizzes = await client.findQuizzesForCourse(cid as String);
     setQuizzes(quizzes);
@@ -24,7 +35,7 @@ export default function Quizzes() {
   return (
     <div id="wd-quizzes">
       <QuizControls />
-      <QuizDetails fetchQuizzes={fetchQuizzes}/>
+      <QuizDetails fetchQuizzes={fetchQuizzes} />
       <hr />
       <ul id="wd-quizzes-list" className="list-group rounded-0">
         <li
@@ -71,21 +82,76 @@ export default function Quizzes() {
                               }
                             })()}
                           </span>
-                        </strong> |
+                        </strong>{" "}
+                        |
                         <span className="text-muted">
                           <strong> Due </strong>
                           {new Date(quiz.due).toLocaleDateString()} |
                         </span>
                         <span className="text-muted"> {quiz.points} pts</span> |
-                        <span className="text-muted"> TODO # OF QUESTIONS</span> |
-                        <span className="text-muted"> TODO SCORE </span>
+                        <span className="text-muted"> TODO # OF QUESTIONS</span>{" "}
+                        |<span className="text-muted"> TODO SCORE </span>
                       </div>
                     </div>
                     <div className="d-flex align-items-center">
-                        <button type="button" className="btn d-flex align-items-center">
+                      <button
+                        type="button"
+                        className="btn d-flex align-items-center p-1"
+                        onClick={() => {
+                          handlePublish(quiz._id, quiz);
+                        }}
+                      >
+                        {quiz.published ? (
                           <GreenCheckmark />
+                        ) : (
+                          <div className="d-flex fs-4 me-1 text-danger">
+                            <MdUnpublished />
+                          </div>
+                        )}
+                      </button>
+                      <div className="dropdown">
+                        <button
+                          type="button"
+                          className="btn d-flex align-items-center p-1"
+                          data-bs-toggle="dropdown"
+                        >
+                          <IoEllipsisVertical className="fs-4" />
                         </button>
-                        <IoEllipsisVertical className="fs-4" />
+                        <ul className="dropdown-menu dropdown-menu-end">
+                          <li>
+                            <button
+                              className="dropdown-item"
+                              onClick={() => {
+                                navigate(
+                                  `/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`
+                                );
+                              }}
+                            >
+                              Edit
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item"
+                              onClick={() => {
+                                deleteQuiz(quiz._id);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item"
+                              onClick={() => {
+                                handlePublish(quiz._id, quiz);
+                              }}
+                            >
+                              {quiz.published ? "Unpublish" : "Publish"}
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </li>

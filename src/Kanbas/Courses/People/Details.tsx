@@ -80,7 +80,7 @@ export default function PeopleDetails({
         )}
         {!editing && (
           <div className="wd-name" onClick={() => setEditing(true)}>
-            {user.firstName} {user.lastName}
+          {user.firstName} {user.lastName}
           </div>
         )}
         {user && editing && (

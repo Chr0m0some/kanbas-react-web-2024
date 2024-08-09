@@ -1,7 +1,18 @@
 import { FaPlus } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
+import * as client from "./client";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function QuizControls() {
+  const { cid } = useParams();
+  const navigate = useNavigate();
+  const [quiz, setQuiz] = useState<any>({});
+  const createQuiz = async () => {
+    const newQuiz = await client.createQuiz({ course: cid });
+    setQuiz(newQuiz);
+    navigate(`/Kanbas/Courses/${cid}/Quizzes/${newQuiz._id}`);
+  };
   return (
     <div id="wd-quiz-controls" className="d-flex justify-content-between">
       <input
@@ -16,7 +27,7 @@ export default function QuizControls() {
           className="btn btn-lg btn-danger me-2"
           onClick={() => {
             {
-              console.log("ADD QUIZ FUNCTION");
+              createQuiz();
             }
           }}
         >
@@ -26,10 +37,7 @@ export default function QuizControls() {
           />
           Quiz
         </button>
-        <button
-          type="button"
-          className="btn btn-lg btn-secondary"
-        >
+        <button type="button" className="btn btn-lg btn-secondary">
           <IoEllipsisVertical />
         </button>
       </div>

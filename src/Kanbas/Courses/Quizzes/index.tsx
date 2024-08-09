@@ -8,12 +8,14 @@ import { useDispatch } from "react-redux";
 import * as client from "./client";
 import "./index.css";
 import { IoEllipsisVertical } from "react-icons/io5";
+import Details from "./Details";
+import QuizDetails from "./Details";
 export default function Quizzes() {
   const { cid } = useParams();
   const [quizzes, setQuizzes] = useState([]);
   const dispatch = useDispatch();
   const fetchQuizzes = async () => {
-    const quizzes = await client.findQuizzesForCourse(cid as string);
+    const quizzes = await client.findQuizzesForCourse(cid as String);
     setQuizzes(quizzes);
   };
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function Quizzes() {
   return (
     <div id="wd-quizzes">
       <QuizControls />
+      <QuizDetails fetchQuizzes={fetchQuizzes}/>
       <hr />
       <ul id="wd-quizzes-list" className="list-group rounded-0">
         <li
@@ -79,8 +82,10 @@ export default function Quizzes() {
                       </div>
                     </div>
                     <div className="d-flex align-items-center">
-                        <GreenCheckmark />
-                        <IoEllipsisVertical className="ms-2 fs-4" />
+                        <button type="button" className="btn d-flex align-items-center">
+                          <GreenCheckmark />
+                        </button>
+                        <IoEllipsisVertical className="fs-4" />
                     </div>
                   </div>
                 </li>

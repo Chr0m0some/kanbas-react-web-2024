@@ -35,17 +35,19 @@ export default function QuizDetails({
     >
       <div className="d-flex justify-content-between m-3">
         <div className="d-flex gap-2">
-          <button type="button" className="btn btn-secondary btn-md">
+          <Link
+            to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/preview`}
+            className="btn btn-secondary d-flex align-items-center"
+          >
             Preview
-          </button>
-          <button
-            type="button"
+          </Link>
+          <Link
+            to={`/Kanbas/Courses/${cid}/Quizzes/editor/${qid}`}
             className="btn btn-secondary btn-md p-3"
-            onClick={() => setEditing(true)}
           >
             <FaPencilAlt />
             <span className="ms-2">Edit</span>
-          </button>
+          </Link>
         </div>
         <Link to={`/Kanbas/Courses/${cid}/Quizzes/`} className="btn ">
           <IoCloseSharp className="fs-1" />

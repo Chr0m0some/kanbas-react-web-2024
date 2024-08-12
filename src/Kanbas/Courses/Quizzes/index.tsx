@@ -2,18 +2,19 @@ import { BsGripVertical } from "react-icons/bs";
 import { RxRocket } from "react-icons/rx";
 import GreenCheckmark from "../Modules/GreenCheckmark";
 import QuizControls from "./QuizControls";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as client from "./client";
 import "./index.css";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { MdUnpublished } from "react-icons/md";
 import QuizDetails from "./Details";
 export default function Quizzes() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { cid } = useParams();
   const navigate = useNavigate();
-  const [quizzes, setQuizzes] = useState([]);
+  const [quizzes, setQuizzes] = useState<any[]>([]);
   const dispatch = useDispatch();
   const deleteQuiz = async (quizId: string) => {
     await client.deleteQuiz(quizId);
@@ -25,13 +26,36 @@ export default function Quizzes() {
     await client.updateQuiz(quizId, updatedQuiz);
     fetchQuizzes();
   };
+  const [latestScores, setLatestScores] = useState<{ [key: string]: number }>(
+    {}
+  );
   const fetchQuizzes = async () => {
     const quizzes = await client.findQuizzesForCourse(cid as String);
     setQuizzes(quizzes);
   };
   useEffect(() => {
     fetchQuizzes();
+    console.log(currentUser.role);
   }, []);
+  useEffect(() => {
+    const fetchLatestScores = async () => {
+      const scores: { [key: string]: number } = {};
+      for (const quiz of quizzes) {
+        if (quiz.course === cid) {
+          const attempts = await client.findAttemptsForQuizAndUser(
+            quiz._id,
+            currentUser._id
+          );
+          if (attempts.length > 0) {
+            scores[quiz._id] = attempts[attempts.length - 1].score;
+          }
+        }
+      }
+      setLatestScores(scores);
+    };
+
+    fetchLatestScores();
+  }, [quizzes, cid, currentUser._id]);
   return (
     <div id="wd-quizzes">
       <QuizControls />
@@ -61,7 +85,23 @@ export default function Quizzes() {
                   >
                     <RxRocket className="fs-4 text-success m-2" />
                     <div className="col p-2">
-                      <div className="fs-5">{quiz.name}</div>
+                      {currentUser.role === "FACULTY" ? (
+                        <Link
+                          to={`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`}
+                          className="link-body-emphasis"
+                        >
+                          {quiz.name}
+                        </Link>
+                      ) : quiz.published && currentUser.role === "STUDENT" ? (
+                        <Link
+                          to={`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/take`}
+                          className="link-body-emphasis"
+                        >
+                          {quiz.name}
+                        </Link>
+                      ) : (
+                        <span className="text-muted">{quiz.name}</span>
+                      )}
                       <div className="fs-6 text-muted">
                         <strong>
                           <span>
@@ -89,17 +129,28 @@ export default function Quizzes() {
                           {new Date(quiz.due).toLocaleDateString()} |
                         </span>
                         <span className="text-muted"> {quiz.points} pts</span> |
-                        <span className="text-muted"> TODO # OF QUESTIONS</span>{" "}
-                        |<span className="text-muted"> TODO SCORE </span>
+                        <span className="text-muted">
+                          {" "}
+                          {quiz.questions.length} questions
+                        </span>
+                        {currentUser.role === "STUDENT" && (
+                          <span className="text-muted">
+                            | Score:
+                            {latestScores[quiz._id] !== undefined
+                              ? latestScores[quiz._id]
+                              : "No attempts"}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="d-flex align-items-center">
                       <button
                         type="button"
-                        className="btn d-flex align-items-center p-1"
+                        className="btn btn-outline-light d-flex align-items-center p-1"
                         onClick={() => {
                           handlePublish(quiz._id, quiz);
                         }}
+                        disabled={currentUser.role === "STUDENT"}
                       >
                         {quiz.published ? (
                           <GreenCheckmark />
@@ -109,49 +160,51 @@ export default function Quizzes() {
                           </div>
                         )}
                       </button>
-                      <div className="dropdown">
-                        <button
-                          type="button"
-                          className="btn d-flex align-items-center p-1"
-                          data-bs-toggle="dropdown"
-                        >
-                          <IoEllipsisVertical className="fs-4" />
-                        </button>
-                        <ul className="dropdown-menu dropdown-menu-end">
-                          <li>
-                            <button
-                              className="dropdown-item"
-                              onClick={() => {
-                                navigate(
-                                  `/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`
-                                );
-                              }}
-                            >
-                              Edit
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              className="dropdown-item"
-                              onClick={() => {
-                                deleteQuiz(quiz._id);
-                              }}
-                            >
-                              Delete
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              className="dropdown-item"
-                              onClick={() => {
-                                handlePublish(quiz._id, quiz);
-                              }}
-                            >
-                              {quiz.published ? "Unpublish" : "Publish"}
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
+                      {currentUser.role === "FACULTY" && (
+                        <div className="dropdown">
+                          <button
+                            type="button"
+                            className="btn d-flex align-items-center p-1"
+                            data-bs-toggle="dropdown"
+                          >
+                            <IoEllipsisVertical className="fs-4" />
+                          </button>
+                          <ul className="dropdown-menu dropdown-menu-end">
+                            <li>
+                              <button
+                                className="dropdown-item"
+                                onClick={() => {
+                                  navigate(
+                                    `/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`
+                                  );
+                                }}
+                              >
+                                Edit
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                className="dropdown-item"
+                                onClick={() => {
+                                  deleteQuiz(quiz._id);
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                className="dropdown-item"
+                                onClick={() => {
+                                  handlePublish(quiz._id, quiz);
+                                }}
+                              >
+                                {quiz.published ? "Unpublish" : "Publish"}
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </li>
